@@ -1,25 +1,10 @@
 package Request;
 
-
-import java.lang.reflect.Type;
-import java.util.List;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.research.ws.wadl.Response;
 import com.google.gson.Gson;
-
-
-
-import com.google.gson.reflect.TypeToken;
-
-
-
 import javax.ws.rs.core.MediaType;
-
-
-
 import model.Alumno;
 import model.Asignacion;
 
@@ -31,7 +16,7 @@ public class RequestService {
  	 private static String RECURSO_ALUMNO_ASIGNACIONES = "student/assignments";
 	 private static String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMTEyMjIzMzMiLCJybmQiOiJ5SXNmZFIwN2lIR3BRRmVjYU9KT2VRPT0ifQ.9pVJGUXhrJPQ-TptNCt971l0h_1dWqWgMrHAWXJchho";
     
-	 public Alumno getAlumno() {
+	 public static Alumno getAlumno() {
 	        Client client = Client.create();
 
 	        ClientResponse response = client
@@ -47,7 +32,8 @@ public class RequestService {
 	        }
 
 	        String output = response.getEntity(String.class);
-
+	        System.out.println(output);
+	        
 	        Gson gson = new Gson();
 	        Alumno alumno = gson.fromJson(output, Alumno.class);
 	        return alumno;
@@ -56,7 +42,7 @@ public class RequestService {
 	 
 	 //Por mas que le pase un parametro trae siempre al mismo alumno...
 	 
-	 public Alumno getAlumnoConFiltro(String param,String value ){
+	 public static Alumno getAlumnoConFiltro(String param,String value ){
         Client client = Client.create();
 		WebResource web = client.resource(API).path(RECURSO_ALUMNO);
         ClientResponse clientWithParameter =                web.queryParam(param, value).
@@ -80,7 +66,7 @@ public class RequestService {
 	 }
 	 
 	 
-	 public Asignacion getAsignacion() {
+	 public static Asignacion getAsignacion() {
 	        Client client = Client.create();
 
 	        ClientResponse response = client
@@ -98,7 +84,7 @@ public class RequestService {
 	        
 	        String output = response.getEntity(String.class);
             
-	        System.out.print(output);
+	        System.out.println(output);
 	        
 	        Gson gson = new Gson();
 	        
@@ -110,8 +96,37 @@ public class RequestService {
 
 
 
-	    public void putAlumno(Alumno alumno) {
+	    public static void putAlumno(String param, String value) {
+	    	Client client = Client.create();
+	    	WebResource web = client.resource(API).path(RECURSO_ALUMNO);
+	    	ClientResponse response = web.header("Authorization", "Bearer " + TOKEN)
+	    								 .accept(MediaType.APPLICATION_JSON)
+	    								 .put(ClientResponse.class,param+":"+value); // no se muy bien que pasarle de segundo parametro
+	    	if (response.getStatus() != 200) {
+	            throw new RuntimeException("Error PUT de alumno, error response : "
+	                    + response.getStatus());
+	        }
+	    	
+	    	String output = response.getEntity(String.class);
+            
+	        System.out.println(output);
+	         
+	    }
 	    
+	    public static void postAlumno(Alumno alumno) {
+	    	Client client = Client.create();
+	    	WebResource web = client.resource(API).path(RECURSO_ALUMNO);
+	    	ClientResponse response = web.header("Authorization", "Bearer " + TOKEN)
+	    								 .accept(MediaType.APPLICATION_JSON)
+	    								 .post(ClientResponse.class,alumno);//no se muy bien que pasarle de segundo parametro
+	    	if (response.getStatus() != 200) {
+	            throw new RuntimeException("Error PUT de alumno, error response : "
+	                    + response.getStatus());
+	        }
+	    	
+	    	String output = response.getEntity(String.class);
+            
+	        System.out.println(output);
 	    }
 	}
 

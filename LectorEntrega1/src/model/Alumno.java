@@ -95,8 +95,6 @@ public class Alumno extends Entity {
 		this.assignments = getAssignments();
 	}
 
-
-
 	public boolean mismoLegajo(int unLeg) {
 
 		return this.getCode() == unLeg;
