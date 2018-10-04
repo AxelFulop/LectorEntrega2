@@ -10,17 +10,15 @@ import Request.RequestService;
 public class CargadorAlumnos {
 
 	public static void initialize() {
+		//prueba PUT y GET alumno
 		
-		//obtengo el alumno del server y lo agrego al repo
-		Alumno alu1 = RequestService.getAlumno();
-		 // no serializa las notas...
-		Asignacion asignacion = RequestService.getAsignacion();
-		List<Asignacion> asignaciones = new ArrayList<Asignacion>();
-		asignaciones.add(asignacion);
-		alu1.setAssignments(asignaciones);
-		AlumnosRepository.getInstance().agregar(alu1);
-		 
-		//RequestService.putAlumno("first_name","Antonio"); // me tira error 500
+			Alumno alu1 = RequestService.getAlumno();
+			alu1.setFirst_name("Fernando");
+			alu1.setLast_name("Casillas");
+			RequestService.putAlumno(alu1); 
+		
+		//prueba GET asignaciones
+			//RequestService.getAsignaciones();	
 		
 	}
 

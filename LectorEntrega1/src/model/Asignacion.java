@@ -15,6 +15,13 @@ import com.google.gson.annotations.SerializedName;
 @Observable
 public class Asignacion {
 
+	@Override
+	public String toString() {
+		return "Asignacion [id=" + id + ", title=" + title + ", descripcion=" + descripcion + ", grades=" + grades
+				+ ", estado=" + estado + "]";
+	}
+
+
 	@SerializedName("id")
 	private int id;
 	@SerializedName("title")
