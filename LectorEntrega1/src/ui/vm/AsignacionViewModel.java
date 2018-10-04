@@ -9,30 +9,52 @@ import model.Asignacion;
 
 
 
+import model.tipoTarea.Tarea;
+
 import org.uqbar.commons.utils.Observable;
+
+import com.google.gson.annotations.SerializedName;
 
 @Observable
 public class AsignacionViewModel {
 
 	private int code;
-	private List<Asignacion> asignaciones;
-	private Asignacion asignacion;
+	@SerializedName("assignments")
+	private List<Asignacion> assignments;
+	private Asignacion assignment;
+	private List<Tarea> tareas;
+	private Tarea tarea;
 
-
+	
 	public AsignacionViewModel(Alumno alumno) {
 		this.code = alumno.getCode();
-		this.asignaciones = alumno.getAssignments();
+		this.assignments = alumno.getAssignments();
 
 	}
 
-
-
-	public Asignacion getAsignacion() {
-		return asignacion;
+	
+	public Tarea getTarea() {
+		return tarea;
 	}
 
-	public void setAsignacion(Asignacion asignacion) {
-		this.asignacion = asignacion;
+	public void setTarea(Tarea tarea) {
+		this.tarea = tarea;
+	}
+
+	public List<Tarea> getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(List<Tarea> tareas) {
+		this.tareas = tareas;
+	}
+
+	public Asignacion getAssignment() {
+		return assignment;
+	}
+
+	public void setAssignment(Asignacion asignacion) {
+		this.assignment = asignacion;
 	}
 
 	public int getCode() {
@@ -43,12 +65,12 @@ public class AsignacionViewModel {
 		this.code = legajo;
 	}
 
-	public List<Asignacion> getAsignaciones() {
-		return asignaciones;
+	public List<Asignacion> getAssignments() {
+		return assignments;
 	}
 
-	public void setAsignaciones(List<Asignacion> asignaciones) {
-		this.asignaciones = asignaciones;
+	public void setAssignments(List<Asignacion> asignaciones) {
+		this.assignments = asignaciones;
 	}
 
 }

@@ -23,7 +23,7 @@ public class Alumno extends Entity {
 	@SerializedName("github_user")
 	private String github_user;
 	@SerializedName("assignments")
-	private List<Asignacion> assignments = new ArrayList<>();
+	private List<Asignacion> assignments = new ArrayList<Asignacion>();
 	
 	
 	
@@ -94,6 +94,8 @@ public class Alumno extends Entity {
 		this.github_user = userGit;
 		this.assignments = getAssignments();
 	}
+
+
 
 	public boolean mismoLegajo(int unLeg) {
 

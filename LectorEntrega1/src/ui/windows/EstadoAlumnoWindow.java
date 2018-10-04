@@ -5,6 +5,7 @@ import model.Alumno;
 
 import model.Asignacion;
 import model.tipoNota.Nota;
+import model.tipoTarea.Tarea;
 
 import org.apache.commons.collections15.Transformer;
 import org.uqbar.arena.widgets.Button;
@@ -36,26 +37,26 @@ public class EstadoAlumnoWindow extends Dialog<AsignacionViewModel> {
 		String leg = Integer.toString(getModelObject().getCode());
 		this.setTitle("Estado del Alumno con leg  " + leg);
 
-		new Label(formPanel).setText("Asignaciones");
+		/*new Label(formPanel).setText("Asignaciones");
 
 		Selector<Asignacion> listasignaciones = new Selector<Asignacion>(
 				formPanel);
 		listasignaciones.bindItemsToProperty("asignaciones").adaptWith(
 				Asignacion.class, "title");
-		listasignaciones.bindValueToProperty("asignacion.title");
+		listasignaciones.bindValueToProperty("asignacion.title");*/
 
 		new Label(formPanel).setText("Tareas");
-		Selector<Asignacion> selectorPrenda = new Selector<Asignacion>(formPanel)
+		Selector<Tarea> selectorPrenda = new Selector<Tarea>(formPanel)
 				.allowNull(true);
-		selectorPrenda.bindItemsToProperty("asignacion.descripcion").adaptWith(
-				Asignacion.class, "descripcion");
-		selectorPrenda.bindValueToProperty("asignacion.descripcion");
+		selectorPrenda.bindItemsToProperty("assignment.tareas").adaptWith(
+				Tarea.class, "title");
+		selectorPrenda.bindValueToProperty("tarea.title");
 
 		new Label(formPanel).setText("Ultima Nota");
-		new Label(formPanel).bindValueToProperty("asignacion.ultimaNota");
+		new Label(formPanel).bindValueToProperty("tarea.ultimaNota");
 
 		new Label(formPanel).setText("Estado");
-		new Label(formPanel).bindValueToProperty("asignacion.estado");
+		new Label(formPanel).bindValueToProperty("tarea.estado");
 
 	}
 

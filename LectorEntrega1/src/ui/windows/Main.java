@@ -2,15 +2,20 @@ package ui.windows;
 
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
+
+import tp0.CargadorAlumnosTp0;
 import tp1.CargadorAlumnos;
+import model.Alumno;
+import model.Repositories.AlumnosRepository;
 
 public class Main extends Application {
 
 	
 
 	public static void main(String[] args) {
-		CargadorAlumnos.initialize();
-		//new Main().start();
+		CargadorAlumnos cargador = new CargadorAlumnos();
+		cargador.initialize();
+		new Main().start();
 	}
 
 	@Override

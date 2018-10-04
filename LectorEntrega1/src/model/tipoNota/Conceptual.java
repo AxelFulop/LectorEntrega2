@@ -1,5 +1,7 @@
 package model.tipoNota;
 
+import java.util.Arrays;
+
 import com.google.gson.annotations.SerializedName;
 
 
@@ -66,5 +68,6 @@ public class Conceptual  extends Nota {
 	}
 
 
-
 }
+
+
