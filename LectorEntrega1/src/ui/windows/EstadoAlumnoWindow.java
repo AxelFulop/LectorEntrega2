@@ -36,18 +36,18 @@ public class EstadoAlumnoWindow extends Dialog<AsignacionViewModel> {
 		String leg = Integer.toString(getModelObject().getCode());
 		this.setTitle("Estado del Alumno con leg  " + leg);
 
-		new Label(formPanel).setText("Asignaciones");
+		/*new Label(formPanel).setText("Asignaciones");
 
 		Selector<Asignacion> listasignaciones = new Selector<Asignacion>(
 				formPanel);
 		listasignaciones.bindItemsToProperty("asignaciones").adaptWith(
 				Asignacion.class, "title");
-		listasignaciones.bindValueToProperty("asignacion.title");
+		listasignaciones.bindValueToProperty("asignacion.title");*/
 
 		new Label(formPanel).setText("Tareas");
 		Selector<Asignacion> selectorPrenda = new Selector<Asignacion>(formPanel)
 				.allowNull(true);
-		selectorPrenda.bindItemsToProperty("asignacion.descripcion").adaptWith(
+		selectorPrenda.bindItemsToProperty("alumno.assignments").adaptWith(
 				Asignacion.class, "descripcion");
 		selectorPrenda.bindValueToProperty("asignacion.descripcion");
 

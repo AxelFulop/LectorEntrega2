@@ -10,7 +10,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		CargadorAlumnos.initialize();
-		//new Main().start();
+		new Main().start();
 	}
 
 	@Override

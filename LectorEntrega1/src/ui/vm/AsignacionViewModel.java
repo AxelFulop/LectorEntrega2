@@ -17,9 +17,23 @@ public class AsignacionViewModel {
 	private int code;
 	private List<Asignacion> asignaciones;
 	private Asignacion asignacion;
+	private Alumno alumno;
+
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
 
 
 	public AsignacionViewModel(Alumno alumno) {
+		this.alumno = alumno;
 		this.code = alumno.getCode();
 		this.asignaciones = alumno.getAssignments();
 
