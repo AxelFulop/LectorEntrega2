@@ -48,55 +48,27 @@ public class RequestService {
 	        return alumno;
 	    }
 	 
-	 
-	 //Por mas que le pase un parametro trae siempre al mismo alumno...
-	 
-	 public static Alumno getAlumnoConFiltro(String param,String value ){
-        Client client = Client.create();
-		WebResource web = client.resource(API).path(RECURSO_ALUMNO);
-        ClientResponse clientWithParameter =                web.queryParam(param, value).
-				                                            header("Authorization", "Bearer " + TOKEN).
-	    		                                            accept(MediaType.APPLICATION_JSON).
-	    		                                            get(ClientResponse.class);
-	        
-	        if ( clientWithParameter.getStatus() != 200) {
-	            throw new RuntimeException("Error GET de alumno, error response : "
-	                    +  clientWithParameter.getStatus());
-	        }
-
-	     
-	     String output = clientWithParameter.getEntity(String.class);
-	     
-	     System.out.println(output);
-	     Gson gson = new Gson();
-	     Alumno alumno = gson.fromJson(output, Alumno.class);
-	     return alumno;
-	        
-	 }
-	 
-	 //TIRA ERROR
 	 public static List<Asignacion> getAsignaciones() {
 		 List<Asignacion> listaAsig = new ArrayList<Asignacion>();
+		 
 	        Client client = Client.create();
+	        ClientResponse response = client
+	                				  .resource(API)
+	                				  .path(RECURSO_ALUMNO_ASIGNACIONES)
+	                				  .header("Authorization", "Bearer " + TOKEN)
+	                				  .accept(MediaType.APPLICATION_JSON_TYPE)
+	                				  .get(ClientResponse.class);
+	                				  //.get(new GenericType<List<Asignacion>>() {});
 
-	        listaAsig = client
-	                	.resource(API)
-	                	.path(RECURSO_ALUMNO_ASIGNACIONES)
-	                	.header("Authorization", "Bearer " + TOKEN)
-	                	.accept(MediaType.APPLICATION_JSON_TYPE)
-	                	.get(new GenericType<List<Asignacion>>() {});
-
-	        /*if (response.getStatus() != 200) {
+	        if (response.getStatus() != 200) {
 	            throw new RuntimeException("Error GET de alumno, error response : "
 	                    					+ response.getStatus());
-	        }*/
-	        for(Asignacion a:listaAsig) {
-	        	System.out.println(a.toString());
 	        }
-
+	       
+	        String output = response.getEntity(String.class);
+	        System.out.println(output);
 	        
-	        //String output = response.getEntity(String.class);
-	        //System.out.println(output);
+	        //FALTA MAPEAR EL JSON A LA LISTA DE ASIGNACIONES
 	       
 	        return listaAsig;
 	    }
@@ -131,9 +103,6 @@ public class RequestService {
 	    	}
 	         
 	    }
-	    
-	    
-	
 
 }
 

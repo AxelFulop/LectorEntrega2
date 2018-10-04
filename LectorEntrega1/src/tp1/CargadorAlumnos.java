@@ -18,7 +18,7 @@ public class CargadorAlumnos {
 			RequestService.putAlumno(alu1); 
 		
 		//prueba GET asignaciones
-			//RequestService.getAsignaciones();	
+			RequestService.getAsignaciones();	
 		
 	}
 
