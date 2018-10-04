@@ -6,8 +6,13 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -15,6 +20,8 @@ import javax.ws.rs.core.MultivaluedMap;
 
 import model.Alumno;
 import model.Asignacion;
+import model.tipoNota.DeserializadorGsonNota;
+import model.tipoNota.Nota;
 
 public class RequestService {
 	 
@@ -49,7 +56,6 @@ public class RequestService {
 	    }
 	 
 	 public static List<Asignacion> getAsignaciones() {
-		 List<Asignacion> listaAsig = new ArrayList<Asignacion>();
 		 
 	        Client client = Client.create();
 	        ClientResponse response = client
@@ -67,10 +73,8 @@ public class RequestService {
 	       
 	        String output = response.getEntity(String.class);
 	        System.out.println(output);
-	        
-	        //FALTA MAPEAR EL JSON A LA LISTA DE ASIGNACIONES
 	       
-	        return listaAsig;
+	        return mapearLista(output);
 	    }
 	 
 	
@@ -102,6 +106,17 @@ public class RequestService {
 	    		e.printStackTrace();
 	    	}
 	         
+	    }
+	    
+	    public static List<Asignacion> mapearLista(String json){
+	    	JsonParser jsonParser = new JsonParser();
+	    	JsonObject object = jsonParser.parse(json).getAsJsonObject();
+	    	JsonArray array = object.get("assignments").getAsJsonArray();
+	    	
+	    	Gson parser = new GsonBuilder().registerTypeAdapter(Nota.class, new DeserializadorGsonNota()).create();
+	    	Asignacion[] asignaciones = parser.fromJson(array, Asignacion[].class);
+	    	
+	    	return Arrays.asList(asignaciones);
 	    }
 
 }

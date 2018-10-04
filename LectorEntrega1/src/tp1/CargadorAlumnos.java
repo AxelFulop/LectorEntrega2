@@ -1,10 +1,9 @@
 package tp1;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.Alumno;
 import model.Asignacion;
-import model.Repositories.AlumnosRepository;
+
+import java.util.List;
 
 import Request.RequestService;
 public class CargadorAlumnos {
@@ -18,7 +17,10 @@ public class CargadorAlumnos {
 			RequestService.putAlumno(alu1); 
 		
 		//prueba GET asignaciones
-			RequestService.getAsignaciones();	
+			List<Asignacion> asig = RequestService.getAsignaciones();	
+			for(Asignacion a:asig) {
+				System.out.println(a.toString());
+			}
 		
 	}
 
