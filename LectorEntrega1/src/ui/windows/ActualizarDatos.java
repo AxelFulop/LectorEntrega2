@@ -27,7 +27,7 @@ public class ActualizarDatos extends Dialog<AlumnoViewModel> {
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Actualizar").onClick(this::accept)
+		new Button(actions).setCaption("Actualizar").onClick(this::actualizarAlumno)
 				.setAsDefault().setWidth(150);
 
 		new Button(actions) //
@@ -48,7 +48,7 @@ public class ActualizarDatos extends Dialog<AlumnoViewModel> {
 				"alumno.last_name");
 
 		new org.uqbar.arena.widgets.Label(formPanel).setText("Legajo");
-		new NumericField(formPanel).setWidth(200).bindValueToProperty(
+		new Label(formPanel).setWidth(200).bindValueToProperty(
 				"alumno.code");
 
 		new org.uqbar.arena.widgets.Label(formPanel).setText("Git User");
@@ -56,4 +56,10 @@ public class ActualizarDatos extends Dialog<AlumnoViewModel> {
 				"alumno.github_user");
 	}
 
+}
+
+public void actualizarAlumno()
+{
+Alumno alu = RequestService.getAlumno();
+RequestService.putAlumno(alu);
 }
