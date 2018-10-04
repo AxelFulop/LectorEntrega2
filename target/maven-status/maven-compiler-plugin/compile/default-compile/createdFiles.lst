@@ -1,0 +1,5 @@
+model\Asignacion.class
+ui\windows\MenuAlumnos.class
+model\Alumno.class
+model\tipoNota\Nota.class
+ui\vm\BuscadorAlumnoModel.class
