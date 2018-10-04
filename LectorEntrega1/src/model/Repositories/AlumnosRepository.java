@@ -36,7 +36,6 @@ public class AlumnosRepository {
         catch (Exception e)
         {
         	String leg = Integer.toString(unLeg);
-        	JOptionPane.showMessageDialog(null,"No existe el alumno con legajo " + leg);
         	throw new ErrorWindow("No existe el alumno con legajo " + leg);
         	
         }

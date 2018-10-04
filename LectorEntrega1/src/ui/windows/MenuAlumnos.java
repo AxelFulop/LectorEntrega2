@@ -11,6 +11,8 @@ import org.uqbar.arena.windows.WindowOwner;
 import ui.vm.AlumnoViewModel;
 import ui.vm.BuscadorAlumnoModel;
 
+import javax.swing.*;
+
 @SuppressWarnings("serial")
 public class MenuAlumnos extends SimpleWindow<BuscadorAlumnoModel> {
 
@@ -40,20 +42,32 @@ public class MenuAlumnos extends SimpleWindow<BuscadorAlumnoModel> {
 	}
 
 	public void actualizar() {
-		getModelObject().search();
-		Dialog<?> dialog = new ActualizarDatos(this, new AlumnoViewModel(
-				getModelObject().getResultado()));
-		dialog.open();
-		dialog.onAccept(getModelObject()::search);
+		try {
+			getModelObject().search();
+			Dialog<?> dialog = new ActualizarDatos(this, new AlumnoViewModel(
+					getModelObject().getResultado()));
+			dialog.open();
+			dialog.onAccept(getModelObject()::search);
+		}catch (Exception e)
+		{
+			JOptionPane.showMessageDialog(null,e.getMessage());
+		}
 
 	}
 
 	public void estado() {
-		getModelObject().search();
-		Dialog<?> dialog = new EstadoAlumnoWindow(this, this.getModelObject()
-				.getResultado());
-		dialog.open();
-		dialog.onAccept(getModelObject()::search);
+		try{
+			getModelObject().search();
+			Dialog<?> dialog = new EstadoAlumnoWindow(this, this.getModelObject()
+					.getResultado());
+			dialog.open();
+			dialog.onAccept(getModelObject()::search);
+		}catch (Exception e)
+		{
+			JOptionPane.showMessageDialog(null,e.getMessage());
+
+		}
+
 		
 		
 	}
